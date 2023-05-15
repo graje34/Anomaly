@@ -40,10 +40,12 @@ def model_predict(file_path,threshold):
     confidence=confidence[0]['pred_scores'][0].item()
     print("prediction label is",pred_label)
     print("confidence is",confidence)
-    confidence=confidence
-    confidence=1-confidence
-    confidence=confidence*100
-    print("confidence is",confidence)
+    if confidence == 0.0:
+        confidence = 1
+        confidence=confidence*100
+
+    else:
+        confidence = confidence * 100
     
     if pred_label==False:
         if confidence > threshold:
